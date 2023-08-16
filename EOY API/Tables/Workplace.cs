@@ -3,15 +3,15 @@ namespace EOY_API.Tables
 {
     public class Workplace
     {
-        int ID { get; set; }
-        string Name_Workplace { get; set; }
-        string IP { get; set; }
-        string MAC { get; set; }
-        string STATE { get; set; }
-        string Name_device { get; set; }
-        
-        string GetHELP { get; set; }
-        string GetINFO { get; set; }
+        public int ID { get; set; }
+        public string Name_Workplace { get; set; }
+        public string IP { get; set; }
+        public string MAC { get; set; }
+        public string STATE { get; set; }
+        public string Name_device { get; set; }
+
+        public string GetHELP { get; set; }
+        public string GetINFO { get; set; }
      
 
 
