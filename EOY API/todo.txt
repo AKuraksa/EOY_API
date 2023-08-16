@@ -13,6 +13,7 @@
 	*	Naučení práce s XAMLU ve WPF(Funguje to jako CSS.style)
 	*   zobrazovací panel bude fungovat na vytvorení dynamickeho panelu s pridani dynamicky prvku do COLUMN a rowů v GRIDU(grid NAUČIT!)
 	*   nastavit FORM na fullscreen (helper => 
+	*můžeš zkusit loading screen i :D
 
 	XAML:
 	<Window
