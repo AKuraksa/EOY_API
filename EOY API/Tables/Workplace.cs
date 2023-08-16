@@ -3,7 +3,7 @@ namespace EOY_API.Tables
 {
     public class Workplace
     {
-        string ID { get; set; }
+        int ID { get; set; }
         string Name_Workplace { get; set; }
         string IP { get; set; }
         string MAC { get; set; }
