@@ -1,0 +1,75 @@
+﻿TODO:
+
+
+--KURY: 
+	_BACKEND:
+
+	* Vytvořit POST pro vytvoření dat
+	*Vytvořit controller na WORKPLACE => 'WorkplaceController.cs'
+
+	_Front-end:
+
+	*  Vytvoření WPF .net CORE (NE!!! ve framworku)
+	*	Naučení práce s XAMLU ve WPF(Funguje to jako CSS.style)
+	*   zobrazovací panel bude fungovat na vytvorení dynamickeho panelu s pridani dynamicky prvku do COLUMN a rowů v GRIDU(grid NAUČIT!)
+	
+	help: určování row/column gridu, lze určit tak, že zadáš => 
+	<Grid x:Name = "panel" background="white"  >
+	<Grid.RowDefinitions>
+
+	<Grid.RowDefinitions>
+
+	<\Grid.RowDefinition>
+	<Grid.RowDefinition><\Grid.RowDefinition> //nebo// <Grid.RowDefinition\>
+													   <Grid.RowDefinition\>
+													   <Grid.RowDefinition\>
+
+	<Grid.RowDefinition>
+
+	<\Grid.RowDefinition>
+
+	<\Grid.RowDefinitions>
+
+
+
+	<Grid.ColumnDefinitions>
+
+	<Grid.ColumnDefinition>
+	<\Grid.ColumnDefinition>
+
+	<Grid.ColumnDefinition>
+	<\Grid.ColumnDefinition>
+
+	<Grid.ColumnDefinition>
+	<\Grid.ColumnDefinition>
+
+    <\Grid.ColumnDefinitions>
+
+
+	<\Grid>
+
+
+	tím si vytvočil tabulku 3x3 (row X column)
+
+	a v C# určování pozic udelas =>
+
+	Grid grid = new Grid();
+
+	grid.setValue(Grid.RowSET, [index])
+	grid.setValue(Grid.Column, [index])
+
+
+	THEN =>  panel.children.add(grid);
+
+	a panel je na svete a takhle  pridas buttony do panelu 
+
+	např. 
+	/*
+
+	Button btn = new Button();
+
+	btn.Name="btn"+numberID;
+	btn.Content = "Přijmout";
+	btn.background = new Brushes(red);
+	grid.children.add(btn);
+	*/

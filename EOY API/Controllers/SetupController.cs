@@ -22,12 +22,14 @@ namespace EOY_API.Controllers
         {
             try
             {
-
+                
+                _context.Database.EnsureDeleted();
                 _context.Database.EnsureCreated();
+                
+                
+                _context.SaveChanges();
 
-
-
-                return Ok("Databáze");
+                return Ok("Database was created");
             }
             catch (Exception ex)
             {
