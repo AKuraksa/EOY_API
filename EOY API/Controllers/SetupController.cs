@@ -17,7 +17,7 @@ namespace EOY_API.Controllers
         }
 
 
-        [HttpPost("create")]
+        [HttpPost("CREATE DATABASE")]
         public ActionResult<string> CreateDatabaseAndTables()
         {
             try
