@@ -1,0 +1,124 @@
+﻿TODO:
+
+
+--KURY: 
+	_BACKEND:
+
+	* Vytvořit POST pro vytvoření dat
+	*Vytvořit controller na WORKPLACE => 'WorkplaceController.cs'
+
+	_Front-end:
+
+	*  Vytvoření WPF .net CORE (NE!!! ve framworku)
+	*	Naučení práce s XAMLU ve WPF(Funguje to jako CSS.style)
+	*   zobrazovací panel bude fungovat na vytvorení dynamickeho panelu s pridani dynamicky prvku do COLUMN a rowů v GRIDU(grid NAUČIT!)
+	*   nastavit FORM na fullscreen (helper => 
+	*můžeš zkusit loading screen i :D
+
+	XAML:
+	<Window
+    ...
+    WindowStyle="None"
+    WindowState="Maximized"
+    ResizeMode="NoResize">
+    <!-- Zde přidejte obsah vaší aplikace -->
+</Window>)
+C#:
+using System;
+using System.Runtime.InteropServices;
+using System.Windows;
+
+namespace YourNamespace
+{
+    public partial class MainWindow : Window
+    {
+        [DllImport("user32.dll")]
+        private static extern IntPtr FindWindow(string className, string windowTitle);
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string className, string windowTitle);
+
+        [DllImport("user32.dll")]
+        private static extern int ShowWindow(IntPtr hWnd, int cmdShow);
+
+        private const int SW_HIDE = 0;
+        private const int SW_SHOW = 5;
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Skryjte lištu Windows
+            IntPtr handle = FindWindow("Shell_TrayWnd", "");
+            ShowWindow(handle, SW_HIDE);
+        }
+    }
+}
+	
+	help: určování row/column gridu, lze určit tak, že zadáš => 
+	<Grid x:Name = "panel" background="white"  >
+	<Grid.RowDefinitions>
+
+	<Grid.RowDefinitions>
+
+	<\Grid.RowDefinition>
+	<Grid.RowDefinition><\Grid.RowDefinition> //nebo// <Grid.RowDefinition\>
+													   <Grid.RowDefinition\>
+													   <Grid.RowDefinition\>
+
+	<Grid.RowDefinition>
+
+	<\Grid.RowDefinition>
+
+	<\Grid.RowDefinitions>
+
+
+
+	<Grid.ColumnDefinitions>
+
+	<Grid.ColumnDefinition>
+	<\Grid.ColumnDefinition>
+
+	<Grid.ColumnDefinition>
+	<\Grid.ColumnDefinition>
+
+	<Grid.ColumnDefinition>
+	<\Grid.ColumnDefinition>
+
+    <\Grid.ColumnDefinitions>
+
+
+	<\Grid>
+
+
+	tím si vytvočil tabulku 3x3 (row X column)
+
+	a v C# určování pozic udelas =>
+
+	Grid grid = new Grid();
+
+	grid.setValue(Grid.RowSET, [index])
+	grid.setValue(Grid.Column, [index])
+
+
+	THEN =>  panel.children.add(grid);
+
+	a panel je na svete a takhle  pridas buttony do panelu 
+
+	např. 
+	/*
+
+	Button btn = new Button();
+
+	btn.Name="btn"+numberID;
+	btn.Content = "Přijmout";
+	btn.background = new Brushes(red);
+	grid.children.add(btn);
+	*/
+
+
+
