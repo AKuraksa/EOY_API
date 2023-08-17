@@ -22,9 +22,17 @@ namespace EOY_API.Controllers
         {
             try
             {
-                
-                _context.Database.EnsureDeleted();
-                _context.Database.EnsureCreated();
+                if(_context.Database != null)
+                {
+                    _context.Database.EnsureDeleted();
+                    
+                }
+
+                else if (_context.Database == null)
+                {
+                    _context.Database.EnsureCreated();
+                }
+                   
                 
                 
                 _context.SaveChanges();
