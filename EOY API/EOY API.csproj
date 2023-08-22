@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Certificates\" />
+    <Folder Include="SQL\" />
   </ItemGroup>
 
 </Project>

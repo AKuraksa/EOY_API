@@ -18,13 +18,23 @@ namespace EOY_API.Controllers
 
         }
 
+        [HttpGet("/FindUser")]
+        public IActionResult Get(string username, string password)
+        {
+            var listUsers = _context.Logins.Where(x=> x.Username == username 
+            && x.Password == password ).ToList();
+
+
+            return Ok(listUsers);
+        }
+
         [HttpGet("/All_Data_FROM_Logins")]
         public IActionResult Get()
         {
-            var LIST_of_USERS = _context.Logins.ToList();
+            var listUsers = _context.Logins.ToList();
 
 
-            return Ok(LIST_of_USERS);
+            return Ok(listUsers);
         }
 
         [HttpGet("/GetDataByLastName")]

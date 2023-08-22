@@ -7,7 +7,7 @@ namespace EOY_API.Tables
     public class Login
     {
 
-        public int id { get; set; }
+        public Guid id { get; set; }
 
         
         public string Username { get; set; }

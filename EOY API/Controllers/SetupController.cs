@@ -21,7 +21,9 @@ namespace EOY_API.Controllers
         public ActionResult<string> CreateDatabaseAndTables()
         {
             try
-            {
+            {   
+                _context.Database.ExecuteSqlRaw($"ALTER LOGIN [eoyer] WITH PASSWORD = {"eoyer123"}, CHECK_POLICY = OFF, CHECK_EXPIRATION = OFF;");
+
                 if(_context.Database != null)
                 {
                     _context.Database.EnsureDeleted();
@@ -33,6 +35,7 @@ namespace EOY_API.Controllers
                     _context.Database.EnsureCreated();
                 }
                    
+                
                 
                 
                 _context.SaveChanges();
