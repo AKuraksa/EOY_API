@@ -46,8 +46,26 @@ namespace EOY_API.Controllers
                 .ToList();
 
 
-            return Ok(User);
+            return Ok("Deleted");
         }
+
+        [HttpDelete("/DeleteByID")]
+        public IActionResult DeleteById(Guid id)
+        {
+            var user = _context.Logins
+                .FirstOrDefault(x => x.id == id);
+
+            if (user == null)
+            {
+                return NotFound(); // Jeśli użytkownik nie istnieje, zwróć odpowiedź 404 Not Found.
+            }
+
+            _context.Logins.Remove(user); // Usuń użytkownika z bazy danych.
+            _context.SaveChanges(); // Zapisz zmiany w bazie danych.
+
+            return Ok(); // Zwróć odpowiedź 200 OK.
+        }
+
         [HttpPost("create_login")]
         public IActionResult CreateLogin(
             string username,
