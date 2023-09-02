@@ -3,6 +3,7 @@ using EOY_API.Tables;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Windows.UI.Notifications;
 
 namespace EOY_API.Controllers
 {
@@ -53,16 +54,19 @@ namespace EOY_API.Controllers
             string password,
             string email,
             string firstName,
-            string lastName)
+            string lastName,
+            bool admin)
         {
-
             var NewLogin = new Login
             {
                 Username=username,
                 Password=password,
                 Email=email,
                 FirstName=firstName,
-                LastName= lastName
+                LastName= lastName,
+                Permission = admin
+                  
+
 
             };
             if (!string.IsNullOrEmpty(username)
@@ -73,15 +77,11 @@ namespace EOY_API.Controllers
             {
                 _context.Logins.Add(NewLogin);
                 return Ok(_context.SaveChanges());
-            }
-                              
+            }                 
             else
             {
                 return BadRequest("data missing");
             }
-
-           
-
         }
 
         [HttpPatch("DataChange")]

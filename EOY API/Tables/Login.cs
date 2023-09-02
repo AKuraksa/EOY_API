@@ -19,5 +19,7 @@ namespace EOY_API.Tables
         public string FirstName { get; set; }
       
         public string LastName { get; set; }
+
+        public bool Permission { get; set; }
     }
 }
