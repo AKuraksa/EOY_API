@@ -49,24 +49,9 @@ namespace EOY_API.Controllers
             return Ok("Deleted");
         }
 
-        [HttpDelete("/DeleteByID")]
-        public IActionResult DeleteById(Guid id)
-        {
-            var user = _context.Logins
-                .FirstOrDefault(x => x.id == id);
+       
 
-            if (user == null)
-            {
-                return NotFound(); // Jeśli użytkownik nie istnieje, zwróć odpowiedź 404 Not Found.
-            }
-
-            _context.Logins.Remove(user); // Usuń użytkownika z bazy danych.
-            _context.SaveChanges(); // Zapisz zmiany w bazie danych.
-
-            return Ok(); // Zwróć odpowiedź 200 OK.
-        }
-
-        [HttpPost("create_login")]
+        [HttpPost("/CreateLogin")]
         public IActionResult CreateLogin(
             string username,
             string password,
@@ -102,23 +87,28 @@ namespace EOY_API.Controllers
             }
         }
 
-        [HttpPatch("DataChange")]
-        public IActionResult DataPATCH (
-            string Search_Username,
-            string password,
-            string email,
-            string firstName,
-            string lastName)
+        [HttpPatch("/DataChangeOfUser")]
+        public IActionResult PutData(
+    Guid idSet,
+    string username = null,
+    string password = null,
+    string email = null,
+    string firstName = null,
+    string lastName = null,
+    bool? permission = null)
         {
-
-            var user = _context.Logins.FirstOrDefault(u => u.Username == Search_Username);
+            var user = _context.Logins.FirstOrDefault(u => u.id == idSet);
 
             if (user == null)
             {
-                return NotFound(); 
+                return NotFound();
             }
 
-         
+            // Aktualizace pouze neprázdných hodnot
+            if (!string.IsNullOrEmpty(username))
+            {
+                user.Username = username;
+            }
             if (!string.IsNullOrEmpty(password))
             {
                 user.Password = password;
@@ -135,11 +125,34 @@ namespace EOY_API.Controllers
             {
                 user.LastName = lastName;
             }
+            if (permission.HasValue)
+            {
+                user.Permission = permission.Value;
+            }
 
             _context.SaveChanges();
 
             return Ok("User data updated successfully");
         }
 
+
+
+        [HttpDelete("/DeleteByID")]
+        public IActionResult DeleteById(Guid id)
+        {
+            var user = _context.Logins
+                .FirstOrDefault(x => x.id == id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            _context.Logins.Remove(user);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
+
 }
