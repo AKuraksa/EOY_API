@@ -78,11 +78,47 @@ namespace EOY_API.Migrations
                     b.ToTable("Logins");
                 });
 
+            modelBuilder.Entity("EOY_API.Tables.Worker", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AuthentificatorID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LoggedWorkplace")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("WorkerFirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WorkerLastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Workers");
+                });
+
             modelBuilder.Entity("EOY_API.Tables.Workplace", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("DeviceName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("GetHELP")
                         .HasColumnType("bit");
@@ -90,23 +126,21 @@ namespace EOY_API.Migrations
                     b.Property<bool>("GetINFO")
                         .HasColumnType("bit");
 
-                    b.Property<string>("IP")
+                    b.Property<string>("Ip")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MAC")
+                    b.Property<string>("Mac")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name_Workplace")
-                        .IsRequired()
+                    b.Property<bool>("State")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserLogged")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name_device")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("STATE")
+                    b.Property<string>("WorkplaceName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

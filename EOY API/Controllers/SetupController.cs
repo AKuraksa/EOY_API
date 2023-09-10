@@ -1,4 +1,5 @@
-﻿using EOY_API.db;
+﻿using EOY_API.Classes;
+using EOY_API.db;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,11 @@ namespace EOY_API.Controllers
     [ApiController]
     public class SetupController : ControllerBase
     {
+        private const string GET_ROUTE = ApiParameters.GetRoute;
+        private const string PUT_ROUTE = ApiParameters.PutRoute;
+        private const string PATCH_ROUTE = ApiParameters.PatchRoute;
+        private const string POST_ROUTE = ApiParameters.PostRoute;
+        private const string DELETE_ROUTE = ApiParameters.DeleteRoute;
         private readonly EoyDbContext _context;
 
         public SetupController(EoyDbContext context)

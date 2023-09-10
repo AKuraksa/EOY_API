@@ -6,11 +6,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EOY_API.Migrations
 {
     /// <inheritdoc />
-    public partial class newMig_sett : Migration
+    public partial class _066 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "HistoryErrors",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TypeError = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WorkPlace = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HistoryErrors", x => x.id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Logins",
                 columns: table => new
@@ -20,7 +34,8 @@ namespace EOY_API.Migrations
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Permission = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,11 +47,11 @@ namespace EOY_API.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name_Workplace = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IP = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MAC = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    STATE = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name_device = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WorkplaceName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Ip = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Mac = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    State = table.Column<bool>(type: "bit", nullable: false),
+                    DeviceName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GetHELP = table.Column<bool>(type: "bit", nullable: false),
                     GetINFO = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -49,6 +64,9 @@ namespace EOY_API.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "HistoryErrors");
+
             migrationBuilder.DropTable(
                 name: "Logins");
 

@@ -17,6 +17,7 @@ namespace EOY_API.db
         public DbSet<Login> Logins { get; set; }
         public DbSet<Workplace> Workplaces { get; set; }
         public DbSet<HistoryError> HistoryErrors { get; set; }
+        public DbSet<Worker> Workers { get; set; }
 
     }
 }

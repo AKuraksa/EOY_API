@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EOY_API.Migrations
 {
     [DbContext(typeof(EoyDbContext))]
-    [Migration("20230902144058_mig026")]
-    partial class mig026
+    [Migration("20230909211548_066")]
+    partial class _066
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,28 @@ namespace EOY_API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("EOY_API.Tables.HistoryError", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TypeError")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WorkPlace")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("HistoryErrors");
+                });
 
             modelBuilder.Entity("EOY_API.Tables.Login", b =>
                 {
@@ -65,29 +87,28 @@ namespace EOY_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("DeviceName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("GetHELP")
                         .HasColumnType("bit");
 
                     b.Property<bool>("GetINFO")
                         .HasColumnType("bit");
 
-                    b.Property<string>("IP")
+                    b.Property<string>("Ip")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MAC")
+                    b.Property<string>("Mac")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name_Workplace")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("State")
+                        .HasColumnType("bit");
 
-                    b.Property<string>("Name_device")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("STATE")
+                    b.Property<string>("WorkplaceName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

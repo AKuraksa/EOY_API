@@ -5,25 +5,24 @@
 namespace EOY_API.Migrations
 {
     /// <inheritdoc />
-    public partial class mig025 : Migration
+    public partial class _5563 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "Permission",
-                table: "Logins",
+                name: "UserLogged",
+                table: "Workplaces",
                 type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
+                nullable: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Permission",
-                table: "Logins");
+                name: "UserLogged",
+                table: "Workplaces");
         }
     }
 }

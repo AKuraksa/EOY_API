@@ -1,4 +1,5 @@
-﻿using EOY_API.db;
+﻿using EOY_API.Classes;
+using EOY_API.db;
 using EOY_API.Tables;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,11 @@ namespace EOY_API.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
+        private const string GET_ROUTE = ApiParameters.GetRoute;
+        private const string PUT_ROUTE = ApiParameters.PutRoute;
+        private const string PATCH_ROUTE = ApiParameters.PatchRoute;
+        private const string POST_ROUTE = ApiParameters.PostRoute;
+        private const string DELETE_ROUTE = ApiParameters.DeleteRoute;
         private readonly EoyDbContext _context;
 
         public LoginController(EoyDbContext context)
@@ -29,7 +35,7 @@ namespace EOY_API.Controllers
             return Ok(listUsers);
         }
 
-        [HttpGet("/All_Data_FROM_Logins")]
+        [HttpGet(ApiParameters.GetRoute)]
         public IActionResult Get()
         {
             var listUsers = _context.Logins.ToList();
@@ -51,7 +57,7 @@ namespace EOY_API.Controllers
 
        
 
-        [HttpPost("/CreateLogin")]
+        [HttpPost(ApiParameters.PostRoute)]
         public IActionResult CreateLogin(
             string username,
             string password,
@@ -68,9 +74,6 @@ namespace EOY_API.Controllers
                 FirstName=firstName,
                 LastName= lastName,
                 Permission = admin
-                  
-
-
             };
             if (!string.IsNullOrEmpty(username)
                 || !string.IsNullOrEmpty(password)
@@ -137,7 +140,7 @@ namespace EOY_API.Controllers
 
 
 
-        [HttpDelete("/DeleteByID")]
+        [HttpDelete(ApiParameters.DeleteRoute)]
         public IActionResult DeleteById(Guid id)
         {
             var user = _context.Logins
