@@ -18,7 +18,7 @@ namespace UpdateWorker_EOY.Fce
                 var migrationFiles = Directory.GetFiles(migrationDirectory, "*.cs")
                             .Where(file => !file.EndsWith("EoyDbContextModelSnapshot.cs"))
                             .ToList();
-                if (migrationFiles.Count <= 2)
+                if (migrationFiles.Count <= 4)
                 {
                     Console.WriteLine("Máte méně než dvě migrační soubory. Nic nebude smazáno.");
                 }
