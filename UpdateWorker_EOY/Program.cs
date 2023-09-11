@@ -58,7 +58,7 @@ class Program
         };
 
       
-        Functions.DeleteMigration();
+        
         processMigration.Start();
         var loadingMIGThread = new Thread(() =>
         {   Console.ForegroundColor = ConsoleColor.Cyan;
@@ -122,11 +122,14 @@ class Program
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine($"Žádná chyba");
+            Functions.DeleteMigration();
         }
         else
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(updateError);
+
         }
+      
     } 
 }
