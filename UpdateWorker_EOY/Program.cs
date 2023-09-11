@@ -13,7 +13,7 @@ class Program
      
         var workingDirectory = @"D:\EOY\EOY_API\EOY API"; 
 
-        // Nastavte příkaz pro spuštění v cmd.exe
+       
         var command = "cmd.exe";
         var argumentsMIG = $"/C dotnet ef migrations add {Guid.NewGuid()}";
         var argumentsUPDATE = $"/C dotnet ef database update";
@@ -85,8 +85,6 @@ class Program
             Console.WriteLine(migrationError);
         }
 
-
-        // Spusťte aktualizaci databáze
         processUpdate.Start();
         var loadingThread = new Thread(() =>
         {
@@ -122,21 +120,5 @@ class Program
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(updateError);
         }
-
-
-    }
-    public static async Task Loading(string text,Process process)
-    {
-        var loadingThread = new Thread(() =>
-        {
-            Console.Write(text);
-            while (!process.HasExited)
-            {
-                Console.Write(".");
-                Thread.Sleep(1000); 
-            }
-        });
-        loadingThread.Start();
-        loadingThread.Join();
-    }
+    } 
 }
