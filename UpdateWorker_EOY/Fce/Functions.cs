@@ -8,9 +8,9 @@ namespace UpdateWorker_EOY.Fce
 {
     public class Functions
     {
-        public static void DeleteMigration(string pathApi)
+        public static void DeleteMigration()
         {
-            var migrationDirectory = Path.Combine(pathApi, "Migrations");
+            var migrationDirectory = Path.Combine(PathDrivers());
 
             if (Directory.Exists(migrationDirectory))
             {
@@ -47,8 +47,51 @@ namespace UpdateWorker_EOY.Fce
                 Console.WriteLine("Složka migrací nebyla nalezena.");
             }
         }
+        public static string PathDrivers()
+        {
+          
+            var lookingPath = @"\EOY API\Migrations";
+            var path = "";
+            DriveInfo[] disky = DriveInfo.GetDrives();
+            foreach (DriveInfo disk in disky)
+            {
+                if (disk.IsReady)
+                {
+                    path= FindPathDriver(disk.Name, lookingPath);
+                }
+               
+            }
+            return path;
+        }
 
+        private static string FindPathDriver(string disk, string lookingPath)
+        {
+            var file = "";
+            try
+            {
+                string[] slozky = Directory.GetDirectories(disk, "*", SearchOption.AllDirectories);
+
+                foreach (string slozka in slozky)
+                {
+                    if (slozka.Contains(lookingPath))
+                    {
+                        Console.WriteLine($"Adresa složky {lookingPath} byla nalezena na disku {disk}: {slozka}");
+                        file = $"{disk}:{slozka}";
+                    }
+                }
+                return file;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                Console.WriteLine($"Nemáte oprávnění přistoupit k některým složkám na disku {disk}: {ex.Message}");
+                return "";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Nastala chyba při hledání na disku {disk}: {ex.Message}");
+                return "";
+            }
+        }
     }
-
 }
 

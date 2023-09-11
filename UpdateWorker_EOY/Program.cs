@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using UpdateWorker_EOY.Fce;
+
 using static System.Net.Mime.MediaTypeNames;
 
 class Program
@@ -9,12 +11,17 @@ class Program
    
     static async Task Main()
     {
+
+      
+
+
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("UpgradeWorker se spouští");
-     
-        var workingDirectory = @"D:\EOY\EOY_API\EOY API"; 
+        var adress = AppDomain.CurrentDomain.BaseDirectory;
+        var workingDirectory = Functions.PathDrivers();
 
-       
+
+
         var command = "cmd.exe";
         var argumentsMIG = $"/C dotnet ef migrations add {Guid.NewGuid()}";
         var argumentsUPDATE = $"/C dotnet ef database update";
@@ -51,7 +58,7 @@ class Program
         };
 
       
-        Functions.DeleteMigration(workingDirectory);
+        Functions.DeleteMigration();
         processMigration.Start();
         var loadingMIGThread = new Thread(() =>
         {   Console.ForegroundColor = ConsoleColor.Cyan;
