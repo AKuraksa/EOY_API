@@ -29,7 +29,7 @@ namespace UpdateWorker_EOY.Fce
 
                     migrationFiles.Sort((a, b) => File.GetCreationTime(b).CompareTo(File.GetCreationTime(a)));
 
-                    var migracjeToDelete = migrationFiles.Skip(2);
+                    var migracjeToDelete = migrationFiles.Skip(4);
 
 
                     foreach (var migrationToDelete in migracjeToDelete)
