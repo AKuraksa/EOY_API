@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace UpdateWorker_EOY.Fce
 {
@@ -15,7 +16,7 @@ namespace UpdateWorker_EOY.Fce
             if (Directory.Exists(migrationDirectory))
             {
                 var migrationFiles = Directory.GetFiles(migrationDirectory, "*.cs")
-                            .Where(file=> !file.EndsWith("EoyDbContextModelSnapshot.cs"))
+                            .Where(file => !file.EndsWith("EoyDbContextModelSnapshot.cs"))
                             .ToList();
                 if (migrationFiles.Count <= 2)
                 {
@@ -25,12 +26,12 @@ namespace UpdateWorker_EOY.Fce
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-              
+
                     migrationFiles.Sort((a, b) => File.GetCreationTime(b).CompareTo(File.GetCreationTime(a)));
 
                     var migracjeToDelete = migrationFiles.Skip(2);
 
-                    
+
                     foreach (var migrationToDelete in migracjeToDelete)
                     {
                         File.Delete(migrationToDelete);
@@ -49,7 +50,7 @@ namespace UpdateWorker_EOY.Fce
         }
         public static string PathDrivers()
         {
-          
+
             var lookingPath = @"\EOY API\Migrations";
             var path = "";
             DriveInfo[] disky = DriveInfo.GetDrives();
@@ -57,40 +58,46 @@ namespace UpdateWorker_EOY.Fce
             {
                 if (disk.IsReady)
                 {
-                    path= FindPathDriver(disk.Name, lookingPath);
+                    path = FindPathDriver(disk.Name, lookingPath);
                 }
-               
+
             }
             return path;
         }
 
         private static string FindPathDriver(string disk, string lookingPath)
         {
-            var file = "";
-            try
             {
-                string[] slozky = Directory.GetDirectories(disk, "*", SearchOption.AllDirectories);
+                var file = "";
 
-                foreach (string slozka in slozky)
+                try
                 {
-                    if (slozka.Contains(lookingPath))
+                    string[] slozky = Directory.GetDirectories(disk, "*", SearchOption.AllDirectories);
+
+                    foreach (string slozka in slozky)
                     {
-                        Console.WriteLine($"Adresa složky {lookingPath} byla nalezena na disku {disk}: {slozka}");
-                        file = $"{disk}:{slozka}";
+                        if (slozka.Contains(lookingPath))
+                        {
+                            Console.WriteLine($"Adresa složky {lookingPath} byla nalezena na disku {disk}: {slozka}");
+                            file = $"{disk}:{slozka}";
+                        }
                     }
+
+                    return file;
                 }
-                return file;
+                catch (UnauthorizedAccessException ex)
+                {
+                    Console.WriteLine($"Nemáte oprávnění přistoupit k některým složkám na disku {disk}: {ex.Message}");
+                    return file; // Pokračovat v hledání dalších složek na disku
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Nastala chyba při hledání na disku {disk}: {ex.Message}");
+                    return file;
+                }
             }
-            catch (UnauthorizedAccessException ex)
-            {
-                Console.WriteLine($"Nemáte oprávnění přistoupit k některým složkám na disku {disk}: {ex.Message}");
-                return "";
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Nastala chyba při hledání na disku {disk}: {ex.Message}");
-                return "";
-            }
+
+
         }
     }
 }
