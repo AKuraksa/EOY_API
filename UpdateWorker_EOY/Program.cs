@@ -17,10 +17,8 @@ class Program
 
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("UpgradeWorker se spouští");
-        var adress = AppDomain.CurrentDomain.BaseDirectory;
+     
         var workingDirectory = Functions.PathDrivers();
-
-
 
         var command = "cmd.exe";
         var argumentsMIG = $"/C dotnet ef migrations add {Guid.NewGuid()}";

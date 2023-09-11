@@ -50,9 +50,10 @@ namespace UpdateWorker_EOY.Fce
         }
         public static string PathDrivers()
         {
-
-            var lookingPath = @"\EOY API\Migrations";
-            var path = "";
+            var path = AppDomain.CurrentDomain.BaseDirectory;
+            
+            var lookingPath = $"{path}\\EOY API\\Migrations";
+    ;
             DriveInfo[] disky = DriveInfo.GetDrives();
             foreach (DriveInfo disk in disky)
             {
@@ -67,38 +68,50 @@ namespace UpdateWorker_EOY.Fce
 
         private static string FindPathDriver(string disk, string lookingPath)
         {
+
+            var file = "";
+
+            try
             {
-                var file = "";
+                string[] slozky = Directory.GetDirectories(disk, "*"); //tady to spadne do catch
 
-                try
+
+                foreach (string slozka in slozky)
                 {
-                    string[] slozky = Directory.GetDirectories(disk, "*", SearchOption.AllDirectories);
+                    if (string.Equals(slozka, Path.Combine(disk, "Documents and Settings"), StringComparison.OrdinalIgnoreCase))
+                        continue;
 
-                    foreach (string slozka in slozky)
+                    try
                     {
                         if (slozka.Contains(lookingPath))
                         {
-                            Console.WriteLine($"Adresa složky {lookingPath} byla nalezena na disku {disk}: {slozka}");
+                            Console.WriteLine($"Adresa složky {lookingPath} byla nalezena {slozka}");
                             file = $"{disk}:{slozka}";
                         }
                     }
+                    catch (UnauthorizedAccessException ex)
+                    {
+                        Console.WriteLine($"Nemáte oprávnění přistoupit k některým složkám na disku {disk}: {ex.Message}");
+                        continue;
+                    }
+                }
 
-                    return file;
-                }
-                catch (UnauthorizedAccessException ex)
-                {
-                    Console.WriteLine($"Nemáte oprávnění přistoupit k některým složkám na disku {disk}: {ex.Message}");
-                    return file; // Pokračovat v hledání dalších složek na disku
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Nastala chyba při hledání na disku {disk}: {ex.Message}");
-                    return file;
-                }
+                return file;
             }
+            catch (UnauthorizedAccessException ex)
+            {
+                Console.WriteLine($"Nemáte oprávnění přistoupit k některým složkám na disku {disk}: {ex.Message}");
+                return file;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Nastala chyba při hledání na disku {disk}: {ex.Message}");
+                return file;
+            }
+
 
 
         }
     }
-}
 
+}
