@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using UpdateWorker_EOY.Fce;
 using static System.Net.Mime.MediaTypeNames;
 
 class Program
@@ -48,9 +49,9 @@ class Program
                 CreateNoWindow = true
             }
         };
-       
 
-
+      
+        Functions.DeleteMigration(workingDirectory);
         processMigration.Start();
         var loadingMIGThread = new Thread(() =>
         {   Console.ForegroundColor = ConsoleColor.Cyan;

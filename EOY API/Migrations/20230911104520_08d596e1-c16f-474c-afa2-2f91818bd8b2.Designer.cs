@@ -4,6 +4,7 @@ using EOY_API.db;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EOY_API.Migrations
 {
     [DbContext(typeof(EoyDbContext))]
-    partial class EoyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230911104520_08d596e1-c16f-474c-afa2-2f91818bd8b2")]
+    partial class _08d596e1c16f474cafa22f91818bd8b2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
