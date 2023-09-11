@@ -15,8 +15,8 @@ namespace UpdateWorker_EOY.Fce
             if (Directory.Exists(migrationDirectory))
             {
                 var migrationFiles = Directory.GetFiles(migrationDirectory, "*.cs")
-              .Where(file => !file.EndsWith(".Designer.cs"))
-              .ToList();
+                            .Where(file=> !file.EndsWith("EoyDbContextModelSnapshot.cs"))
+                            .ToList();
                 if (migrationFiles.Count <= 2)
                 {
                     Console.WriteLine("Máte méně než dvě migrační soubory. Nic nebude smazáno.");
@@ -25,17 +25,12 @@ namespace UpdateWorker_EOY.Fce
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    var migrationFile = Directory.GetFiles(migrationDirectory, "*.cs")
-                            .Where(file => !file.EndsWith(".Designer.cs"))
-                            .ToList();
+              
+                    migrationFiles.Sort((a, b) => File.GetCreationTime(b).CompareTo(File.GetCreationTime(a)));
 
-                    // Seřaďte migrace podle data vytvoření (nejnovější první)
-                    migrationFile.Sort((a, b) => File.GetCreationTime(b).CompareTo(File.GetCreationTime(a)));
+                    var migracjeToDelete = migrationFiles.Skip(2);
 
-                    // Ponechte pouze tři nejnovější migrace
-                    var migracjeToDelete = migrationFile.Skip(2);
-
-                    // Odstraňte staré migrace
+                    
                     foreach (var migrationToDelete in migracjeToDelete)
                     {
                         File.Delete(migrationToDelete);

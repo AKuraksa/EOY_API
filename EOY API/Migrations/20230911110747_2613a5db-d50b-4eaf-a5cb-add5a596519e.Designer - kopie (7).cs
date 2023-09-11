@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EOY_API.Migrations
 {
     [DbContext(typeof(EoyDbContext))]
-    [Migration("20230911101439_2f1f72ad-4c6f-4d29-afac-2c0b0a25c6e3")]
-    partial class _2f1f72ad4c6f4d29afac2c0b0a25c6e3
+    [Migration("20230911110747_2613a5db-d50b-4eaf-a5cb-add5a596519e")]
+    partial class _2613a5dbd50b4eafa5cbadd5a596519e
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

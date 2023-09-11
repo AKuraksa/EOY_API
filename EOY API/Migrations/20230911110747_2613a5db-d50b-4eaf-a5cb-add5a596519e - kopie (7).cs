@@ -5,7 +5,7 @@
 namespace EOY_API.Migrations
 {
     /// <inheritdoc />
-    public partial class _08d596e1c16f474cafa22f91818bd8b2 : Migration
+    public partial class _2613a5dbd50b4eafa5cbadd5a596519e : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
