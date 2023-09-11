@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EOY_API.Migrations
 {
     /// <inheritdoc />
-    public partial class _066 : Migration
+    public partial class _6e8bc914cacd416284bc69f46a23ea9f : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -43,6 +43,23 @@ namespace EOY_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Workers",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Updated = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    WorkerFirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WorkerLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AuthentificatorID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LoggedWorkplace = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Workers", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Workplaces",
                 columns: table => new
                 {
@@ -52,6 +69,7 @@ namespace EOY_API.Migrations
                     Mac = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     State = table.Column<bool>(type: "bit", nullable: false),
                     DeviceName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserLogged = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     GetHELP = table.Column<bool>(type: "bit", nullable: false),
                     GetINFO = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -69,6 +87,9 @@ namespace EOY_API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Logins");
+
+            migrationBuilder.DropTable(
+                name: "Workers");
 
             migrationBuilder.DropTable(
                 name: "Workplaces");

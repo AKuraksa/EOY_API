@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EOY_API.Migrations
 {
     [DbContext(typeof(EoyDbContext))]
-    [Migration("20230909232558_5478")]
-    partial class _5478
+    [Migration("20230911100352_6e8bc914-cacd-4162-84bc-69f46a23ea9f")]
+    partial class _6e8bc914cacd416284bc69f46a23ea9f
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -139,6 +139,9 @@ namespace EOY_API.Migrations
 
                     b.Property<bool>("State")
                         .HasColumnType("bit");
+
+                    b.Property<string>("UserLogged")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WorkplaceName")
                         .IsRequired()

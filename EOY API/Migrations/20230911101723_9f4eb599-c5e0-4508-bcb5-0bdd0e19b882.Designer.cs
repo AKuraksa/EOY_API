@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EOY_API.Migrations
 {
     [DbContext(typeof(EoyDbContext))]
-    [Migration("20230909231036_77")]
-    partial class _77
+    [Migration("20230911101723_9f4eb599-c5e0-4508-bcb5-0bdd0e19b882")]
+    partial class _9f4eb599c5e04508bcb50bdd0e19b882
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,13 +95,16 @@ namespace EOY_API.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LoggedWorkplace")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("WorkerFirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Updated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("WorkerName")
+                    b.Property<string>("WorkerLastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -136,6 +139,9 @@ namespace EOY_API.Migrations
 
                     b.Property<bool>("State")
                         .HasColumnType("bit");
+
+                    b.Property<string>("UserLogged")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WorkplaceName")
                         .IsRequired()

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EOY_API.Migrations
 {
     [DbContext(typeof(EoyDbContext))]
-    [Migration("20230909211548_066")]
-    partial class _066
+    [Migration("20230911101048_84abd170-635f-4b0b-af0e-802d59ded845")]
+    partial class _84abd170635f4b0baf0e802d59ded845
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -81,6 +81,38 @@ namespace EOY_API.Migrations
                     b.ToTable("Logins");
                 });
 
+            modelBuilder.Entity("EOY_API.Tables.Worker", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AuthentificatorID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LoggedWorkplace")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("WorkerFirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WorkerLastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Workers");
+                });
+
             modelBuilder.Entity("EOY_API.Tables.Workplace", b =>
                 {
                     b.Property<Guid>("ID")
@@ -107,6 +139,9 @@ namespace EOY_API.Migrations
 
                     b.Property<bool>("State")
                         .HasColumnType("bit");
+
+                    b.Property<string>("UserLogged")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WorkplaceName")
                         .IsRequired()
